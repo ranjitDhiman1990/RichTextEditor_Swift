@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'RichTextEditor_Swift_Example' do
+  pod 'RichTextEditor_Swift', :path => '../'
+
+  target 'RichTextEditor_Swift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

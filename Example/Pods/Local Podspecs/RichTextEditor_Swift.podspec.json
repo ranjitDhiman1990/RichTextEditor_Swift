@@ -1,0 +1,22 @@
+{
+  "name": "RichTextEditor_Swift",
+  "version": "0.1.0",
+  "summary": "A short description of RichTextEditor_Swift.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/dhimanranjit1990@gmail.com/RichTextEditor_Swift",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "dhimanranjit1990@gmail.com": "dhimanranjit197@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/dhimanranjit1990@gmail.com/RichTextEditor_Swift.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "RichTextEditor_Swift/Classes/**/*"
+}

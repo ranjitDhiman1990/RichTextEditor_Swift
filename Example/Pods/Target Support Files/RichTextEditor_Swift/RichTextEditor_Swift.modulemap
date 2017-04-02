@@ -1,0 +1,6 @@
+framework module RichTextEditor_Swift {
+  umbrella header "RichTextEditor_Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

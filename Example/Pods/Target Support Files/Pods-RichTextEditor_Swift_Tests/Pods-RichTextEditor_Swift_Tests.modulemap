@@ -1,0 +1,6 @@
+framework module Pods_RichTextEditor_Swift_Tests {
+  umbrella header "Pods-RichTextEditor_Swift_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

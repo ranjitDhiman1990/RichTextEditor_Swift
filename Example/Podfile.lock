@@ -1,0 +1,16 @@
+PODS:
+  - RichTextEditor_Swift (0.1.0)
+
+DEPENDENCIES:
+  - RichTextEditor_Swift (from `../`)
+
+EXTERNAL SOURCES:
+  RichTextEditor_Swift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  RichTextEditor_Swift: 2108376f60e2c2af2d74d3982ee87842134fffae
+
+PODFILE CHECKSUM: 80b766d421270f1f872163e81d690d1911c67f56
+
+COCOAPODS: 1.0.1

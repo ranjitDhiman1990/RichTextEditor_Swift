@@ -1,25 +1,155 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Rich Text View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RichTextViewController" id="vXZ-lx-hvc" customClass="RichTextViewController" customModule="RichTextEditor_Swift_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-KC-3rM">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5GL-Kl-S1L"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="RichTextEditor" id="xj5-eJ-Gqx">
+                                        <barButtonItem key="rightBarButtonItem" title="HTML" id="9mK-qf-Rf3"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byL-XX-YoR" userLabel="EditorView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iot-Je-gqb">
+                                        <rect key="frame" x="8" y="4" width="44" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="9Sb-NI-Ax6"/>
+                                            <constraint firstAttribute="height" constant="35" id="J34-Nu-kaH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Bold">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="txtFormatterButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Dbt-Bz-W2H"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BI7-ln-Swq">
+                                        <rect key="frame" x="60" y="4" width="44" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="nOV-SJ-VhV"/>
+                                            <constraint firstAttribute="height" constant="35" id="tki-SL-CuY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Italic">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="txtFormatterButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fIG-oV-DLD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htK-fJ-yxT">
+                                        <rect key="frame" x="112" y="4" width="75" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="LpT-0W-qJ9"/>
+                                            <constraint firstAttribute="height" constant="35" id="UjH-Ww-cfN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Underline">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="txtFormatterButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3Cz-Af-fCH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NR7-SR-piz">
+                                        <rect key="frame" x="216" y="4" width="96" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="96" id="JTC-4T-TK6"/>
+                                            <constraint firstAttribute="height" constant="35" id="ihG-4u-QqI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Attach Image">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="txtFormatterButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CqC-9G-bPn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Iot-Je-gqb" firstAttribute="leading" secondItem="byL-XX-YoR" secondAttribute="leading" constant="8" id="5fd-fD-PYA"/>
+                                    <constraint firstAttribute="bottom" secondItem="htK-fJ-yxT" secondAttribute="bottom" constant="5" id="88i-Ph-rs8"/>
+                                    <constraint firstItem="Iot-Je-gqb" firstAttribute="top" secondItem="byL-XX-YoR" secondAttribute="top" constant="4" id="9RT-Ij-IgZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="NR7-SR-piz" secondAttribute="trailing" constant="8" id="H5X-aX-XBJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="BI7-ln-Swq" secondAttribute="bottom" constant="5" id="XYV-FF-bKL"/>
+                                    <constraint firstAttribute="height" constant="44" id="fFc-xg-kgk"/>
+                                    <constraint firstItem="BI7-ln-Swq" firstAttribute="top" secondItem="byL-XX-YoR" secondAttribute="top" constant="4" id="inl-08-ppz"/>
+                                    <constraint firstItem="htK-fJ-yxT" firstAttribute="leading" secondItem="BI7-ln-Swq" secondAttribute="trailing" constant="8" id="m6k-rM-kSY"/>
+                                    <constraint firstAttribute="bottom" secondItem="Iot-Je-gqb" secondAttribute="bottom" constant="5" id="qGa-Ar-z2o"/>
+                                    <constraint firstItem="NR7-SR-piz" firstAttribute="top" secondItem="byL-XX-YoR" secondAttribute="top" constant="4" id="qaf-QV-fmd"/>
+                                    <constraint firstItem="htK-fJ-yxT" firstAttribute="top" secondItem="byL-XX-YoR" secondAttribute="top" constant="4" id="thF-eI-1ps"/>
+                                    <constraint firstItem="BI7-ln-Swq" firstAttribute="leading" secondItem="Iot-Je-gqb" secondAttribute="trailing" constant="8" id="uNE-Dq-ICa"/>
+                                    <constraint firstAttribute="bottom" secondItem="NR7-SR-piz" secondAttribute="bottom" constant="5" id="xjh-ga-CCL"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fV1-Ss-GlT" customClass="RichTextEditor" customModule="RichTextEditor_Swift">
+                                <rect key="frame" x="0.0" y="108" width="320" height="372"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="byL-XX-YoR" secondAttribute="trailing" id="380-Uz-Dbk"/>
+                            <constraint firstAttribute="trailing" secondItem="Eju-KC-3rM" secondAttribute="trailing" id="3Aa-Da-Iee"/>
+                            <constraint firstItem="byL-XX-YoR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="7ID-SX-seX"/>
+                            <constraint firstItem="Eju-KC-3rM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="8iN-PP-huI"/>
+                            <constraint firstItem="byL-XX-YoR" firstAttribute="top" secondItem="Eju-KC-3rM" secondAttribute="bottom" id="ArG-0y-HTJ"/>
+                            <constraint firstItem="Eju-KC-3rM" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="IGk-3k-Un4"/>
+                            <constraint firstAttribute="trailing" secondItem="fV1-Ss-GlT" secondAttribute="trailing" id="JeH-ly-M61"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="fV1-Ss-GlT" secondAttribute="bottom" id="Kgu-2x-raS"/>
+                            <constraint firstItem="fV1-Ss-GlT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="SiI-HW-OVk"/>
+                            <constraint firstItem="fV1-Ss-GlT" firstAttribute="top" secondItem="byL-XX-YoR" secondAttribute="bottom" id="gYu-E3-Z0G"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="buttonBold" destination="Iot-Je-gqb" id="Ul8-vX-PUo"/>
+                        <outlet property="buttonImageAttachment" destination="NR7-SR-piz" id="pfa-l2-1Ef"/>
+                        <outlet property="buttonItalic" destination="BI7-ln-Swq" id="26N-wE-qbY"/>
+                        <outlet property="buttonUnderlined" destination="htK-fJ-yxT" id="ZKI-jT-JO2"/>
+                        <outlet property="richTextEditor" destination="fV1-Ss-GlT" id="taK-lC-fnE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="130" y="289"/>
         </scene>
     </scenes>
 </document>

@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		1A5A190F4B9067913DB9E2EB /* Pods_RichTextEditor_Swift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 440B9E4906AC6E7C4DF01233 /* Pods_RichTextEditor_Swift_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		6ADE7ED61E92514800AA14B9 /* RichTextFormatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADE7ED51E92514800AA14B9 /* RichTextFormatterView.swift */; };
+		6AE4DAC21E922E38008944B5 /* RichTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4DAC11E922E38008944B5 /* RichTextViewController.swift */; };
 		E90F0994905C17F144C4C4E4 /* Pods_RichTextEditor_Swift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE0D5C4E43C6C62BE0AEF97 /* Pods_RichTextEditor_Swift_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,13 +36,14 @@
 		607FACD01AFB9204008FA782 /* RichTextEditor_Swift_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichTextEditor_Swift_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* RichTextEditor_Swift_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RichTextEditor_Swift_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		6ADE7ED51E92514800AA14B9 /* RichTextFormatterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextFormatterView.swift; sourceTree = "<group>"; };
+		6AE4DAC11E922E38008944B5 /* RichTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextViewController.swift; sourceTree = "<group>"; };
 		8598DFDC8FB5E24050602FAD /* Pods-RichTextEditor_Swift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichTextEditor_Swift_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RichTextEditor_Swift_Tests/Pods-RichTextEditor_Swift_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8BE8C7400F0CD1F520F2334D /* Pods-RichTextEditor_Swift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichTextEditor_Swift_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RichTextEditor_Swift_Example/Pods-RichTextEditor_Swift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A7F81E030E19BA939A90CE0E /* Pods-RichTextEditor_Swift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RichTextEditor_Swift_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-RichTextEditor_Swift_Example/Pods-RichTextEditor_Swift_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,8 +95,9 @@
 		607FACD21AFB9204008FA782 /* Example for RichTextEditor_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				6ADE7ED41E92511D00AA14B9 /* CustomViews */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				6AE4DAC11E922E38008944B5 /* RichTextViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -137,6 +140,14 @@
 				CABC0F39871693BEDA363BA8 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		6ADE7ED41E92511D00AA14B9 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				6ADE7ED51E92514800AA14B9 /* RichTextFormatterView.swift */,
+			);
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		98F3BE8F4B2BD097D6CC626B /* Frameworks */ = {
@@ -361,8 +372,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				6ADE7ED61E92514800AA14B9 /* RichTextFormatterView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				6AE4DAC21E922E38008944B5 /* RichTextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

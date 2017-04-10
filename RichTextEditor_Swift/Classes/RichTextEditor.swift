@@ -9,24 +9,24 @@
 import UIKit
 import Foundation
 
-public class RichTextEditor: UITextView, UITextViewDelegate {
+open class RichTextEditor: UITextView, UITextViewDelegate {
 
     var placeHolderText: String = "Type text here..."
     
-    public var isBoldEnabled:Bool = false
-    public var isItalicEnabled:Bool = false
-    public var isUnderlineEnabled:Bool = false
-    public var isBackSpaceEnabled : Bool = false
+    open var isBoldEnabled:Bool = false
+    open var isItalicEnabled:Bool = false
+    open var isUnderlineEnabled:Bool = false
+    open var isBackSpaceEnabled : Bool = false
     
-    public var isBoldButtonPressed = false
-    public var isItalicButtonPressed = false
-    public var isUnderlinedButtonPressed = false
+    open var isBoldButtonPressed = false
+    open var isItalicButtonPressed = false
+    open var isUnderlinedButtonPressed = false
     
-    public var textChanged: Bool = false
+    open var textChanged: Bool = false
     
-    public var imageScalingFactor: CGFloat = 1.0
+    open var imageScalingFactor: CGFloat = 1.0
     
-    public var updatingTextRange: NSRange = NSMakeRange(0, 0)
+    open var updatingTextRange: NSRange = NSMakeRange(0, 0)
     
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -37,22 +37,156 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
         super.init(coder: coder)
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         self.text = placeHolderText
-        self.textColor = UIColor.lightGrayColor()
+        self.textColor = UIColor.lightGray
         self.delegate = self
     }
     
-    public func textViewDidBeginEditing(textView: UITextView) {
+    
+    open func formatBoldSeletedText() {
+        self.isBoldButtonPressed = true
+        if !isBoldEnabled {
+            isBoldEnabled = true
+            if updatingTextRange.length > 0 && self.text != placeHolderText {
+                let rangeToModify = updatingTextRange
+                guard rangeToModify.location < self.attributedText.length else {
+                    return
+                }
+                
+                let attributedString = NSMutableAttributedString(string: "")
+                attributedString.append(self.attributedText)
+                
+                if  (updatingTextRange.location + updatingTextRange.length) != self.attributedText.string.characters.count {
+                    self.checkForAttributes(rangeToModify)
+                }
+                
+                self.addBoldFormat(attributedString, rangeToModify: rangeToModify)
+                self.attributedText = attributedString
+                self.selectedRange = rangeToModify
+            }
+        } else {
+            isBoldEnabled = false
+            if updatingTextRange.length > 0 && self.text != placeHolderText {
+                let rangeToModify = updatingTextRange
+                guard rangeToModify.location < self.attributedText.length else {
+                    return
+                }
+                
+                let attributedString = NSMutableAttributedString(string: "")
+                attributedString.append(self.attributedText)
+                
+                if  (updatingTextRange.location + updatingTextRange.length) != self.attributedText.string.characters.count {
+                    self.checkForAttributes(rangeToModify)
+                }
+                
+                self.removeBoldFormat(attributedString, rangeToModify: rangeToModify)
+                self.attributedText = attributedString
+                self.selectedRange = rangeToModify
+            }
+        }
+    }
+    
+    open func formatItalicSeletedText() {
+        self.isItalicButtonPressed = true
+        if !isItalicEnabled {
+            isItalicEnabled = true
+            if updatingTextRange.length > 0 && self.text != placeHolderText {
+                let rangeToModify = updatingTextRange
+                guard rangeToModify.location < self.attributedText.length else {
+                    return
+                }
+                
+                let attributedString = NSMutableAttributedString(string: "")
+                attributedString.append(self.attributedText)
+                
+                if  (updatingTextRange.location + updatingTextRange.length) != self.attributedText.string.characters.count {
+                    self.checkForAttributes(rangeToModify)
+                }
+                
+                self.addItalicFormat(attributedString, rangeToModify: rangeToModify)
+                self.attributedText = attributedString
+                // Set cursor position after modifying attribute
+                self.selectedRange = rangeToModify
+            }
+        } else {
+            isItalicEnabled = false
+            if updatingTextRange.length > 0 && self.text != placeHolderText {
+                let rangeToModify = updatingTextRange
+                guard rangeToModify.location < self.attributedText.length else {
+                    return
+                }
+                
+                let attributedString = NSMutableAttributedString(string: "")
+                attributedString.append(self.attributedText)
+                
+                if  (updatingTextRange.location + updatingTextRange.length) != self.attributedText.string.characters.count {
+                    self.checkForAttributes(rangeToModify)
+                }
+                
+                self.removeUnderlineFormat(attributedString, rangeToModify: rangeToModify)
+                self.attributedText = attributedString
+                // Set cursor position after modifying attribute
+                self.selectedRange = rangeToModify
+            }
+        }
+    }
+    
+    open func formatUnderlinedSeletedText() {
+        self.isUnderlinedButtonPressed = true
+        if !isUnderlineEnabled {
+            isUnderlineEnabled = true
+            if updatingTextRange.length > 0 && self.text != placeHolderText {
+                let rangeToModify = updatingTextRange
+                guard rangeToModify.location < self.attributedText.length else {
+                    return
+                }
+                let attributedString = NSMutableAttributedString(string: "")
+                attributedString.append(self.attributedText)
+                
+                if  (updatingTextRange.location + updatingTextRange.length) != self.attributedText.string.characters.count {
+                    self.checkForAttributes(rangeToModify)
+                }
+                
+                self.addUnderlineFormat(attributedString, rangeToModify: rangeToModify)
+                self.attributedText = attributedString
+                // Set cursor position after modifying attribute
+                self.selectedRange = rangeToModify
+            }
+        } else {
+            isUnderlineEnabled = false
+            if updatingTextRange.length > 0 && self.text != placeHolderText {
+                let rangeToModify = updatingTextRange
+                guard rangeToModify.location < self.attributedText.length else {
+                    return
+                }
+                
+                let attributedString = NSMutableAttributedString(string: "")
+                attributedString.append(self.attributedText)
+                
+                if  (updatingTextRange.location + updatingTextRange.length) != self.attributedText.string.characters.count {
+                    self.checkForAttributes(rangeToModify)
+                }
+                
+                self.removeUnderlineFormat(attributedString, rangeToModify: rangeToModify)
+                self.attributedText = attributedString
+                // Set cursor position after modifying attribute
+                self.selectedRange = rangeToModify
+            }
+        }
+    }
+    
+    
+    open func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.attributedText.length == 0 || textView.text == placeHolderText {
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 textView.selectedRange = NSMakeRange(0, 0)
             })
         }
     }
     
-    public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    open func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         updatingTextRange = range
         if text.characters.count == 0 {
             isBackSpaceEnabled = true
@@ -63,20 +197,20 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
         if textView.attributedText.length == 0 && text.characters.count == 0 {
             textChanged = true
             textView.text = placeHolderText
-            textView.textColor = UIColor.lightGrayColor()
+            textView.textColor = UIColor.lightGray
             self.disableAllFormattingButton()
         } else {
             if text.characters.count == 0 {
                 textChanged = false
                 if range.location == 0 && (textView.attributedText.length == 0 || textView.attributedText.length == range.length) {
                     textView.text = placeHolderText
-                    textView.textColor = UIColor.lightGrayColor()
+                    textView.textColor = UIColor.lightGray
                     textView.selectedRange = NSMakeRange(0, 0)
                     self.disableAllFormattingButton()
                 }
             } else {
                 textChanged = true
-                textView.textColor = UIColor.blackColor()
+                textView.textColor = UIColor.black
                 if textView.text == placeHolderText {
                     textView.text = ""
                 }
@@ -86,9 +220,9 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
         return true
     }
     
-    public func textViewDidChangeSelection(textView: UITextView) {
+    open func textViewDidChangeSelection(_ textView: UITextView) {
         if textView.attributedText.length == 0 || textView.text == placeHolderText {
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 textView.selectedRange = NSMakeRange(0, 0)
                 return
             })
@@ -108,7 +242,7 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
     }
     
     
-    public func textViewDidChange(textView: UITextView) {
+    open func textViewDidChange(_ textView: UITextView) {
 //        let selectedRange = self.textViewRichTextEditor.selectedRange
         
         if isBackSpaceEnabled {
@@ -120,9 +254,9 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
             let rangeToModify = NSMakeRange((selectedRange.location - 1) > 0 ? selectedRange.location - 1 : 0, 1)
             
             let attributedString = NSMutableAttributedString(string: "")
-            attributedString.appendAttributedString(textView.attributedText)
+            attributedString.append(textView.attributedText)
             
-            let customFont = UIFont.systemFontOfSize(14.0)
+            let customFont = UIFont.systemFont(ofSize: 14.0)
             let normalAttributes = [NSFontAttributeName: customFont]
             attributedString.addAttributes(normalAttributes, range: rangeToModify)
             
@@ -152,7 +286,7 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
         textChanged = false
     }
     
-    func checkForAttributes(range: NSRange) {
+    func checkForAttributes(_ range: NSRange) {
         if self.attributedText.string == placeHolderText || (self.isBoldButtonPressed || self.isItalicButtonPressed || self.isUnderlinedButtonPressed) {
             return
         }
@@ -168,7 +302,7 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
             }
         }
         
-        self.attributedText.enumerateAttributesInRange(rangeToCheck, options: NSAttributedStringEnumerationOptions(rawValue: 0)) { (object, range, stop) in
+        self.attributedText.enumerateAttributes(in: rangeToCheck, options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (object, range, stop) in
             if object.keys.contains(NSFontAttributeName) {
                 if let font = object[NSFontAttributeName] as? UIFont {
                     if font.isBold {
@@ -275,20 +409,20 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
 //        self.richFormatterView.underlinedButton.backgroundColor = UIColor.blueColor()
     }
     
-    func addBoldFormat(attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
-        let customFont = UIFont.systemFontOfSize(14.0)
-        let boldAttributes = [NSFontAttributeName: customFont.withTraits(.TraitBold)]
+    func addBoldFormat(_ attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
+        let customFont = UIFont.systemFont(ofSize: 14.0)
+        let boldAttributes = [NSFontAttributeName: customFont.withTraits(.traitBold)]
         attributedString.addAttributes(boldAttributes, range: rangeToModify)
         return attributedString
     }
     
-    func removeBoldFormat(attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
-        attributedString.enumerateAttributesInRange(rangeToModify, options: []) { (attributes, range, _) -> Void in
+    func removeBoldFormat(_ attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
+        attributedString.enumerateAttributes(in: rangeToModify, options: []) { (attributes, range, _) -> Void in
             for (attribute, object) in attributes {
                 if let font = object as? UIFont {
                     if attribute == NSFontAttributeName && font.isBold {
                         attributedString.removeAttribute(attribute, range: range)
-                        let customFont = UIFont.systemFontOfSize(14.0)
+                        let customFont = UIFont.systemFont(ofSize: 14.0)
                         let normalAttributes = [NSFontAttributeName: customFont]
                         attributedString.addAttributes(normalAttributes, range: range)
                         break
@@ -300,20 +434,20 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
     }
     
     
-    func addItalicFormat(attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
-        let customFont = UIFont.italicSystemFontOfSize(14.0)
-        let italicAttributes = isBoldEnabled ? [NSFontAttributeName: customFont.withTraits(.TraitBold, .TraitItalic)] : [NSFontAttributeName: customFont.withTraits(.TraitItalic)]
+    func addItalicFormat(_ attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
+        let customFont = UIFont.italicSystemFont(ofSize: 14.0)
+        let italicAttributes = isBoldEnabled ? [NSFontAttributeName: customFont.withTraits(.traitBold, .traitItalic)] : [NSFontAttributeName: customFont.withTraits(.traitItalic)]
         attributedString.addAttributes(italicAttributes, range: rangeToModify)
         return attributedString
     }
     
-    func removeItalicFormat(attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
-        attributedString.enumerateAttributesInRange(rangeToModify, options: []) { (attributes, range, _) -> Void in
+    func removeItalicFormat(_ attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
+        attributedString.enumerateAttributes(in: rangeToModify, options: []) { (attributes, range, _) -> Void in
             for (attribute, object) in attributes {
                 if let font = object as? UIFont {
                     if attribute == NSFontAttributeName && font.isItalic {
                         attributedString.removeAttribute(attribute, range: range)
-                        let customFont = UIFont.systemFontOfSize(14.0)
+                        let customFont = UIFont.systemFont(ofSize: 14.0)
                         let normalAttributes = [NSFontAttributeName: customFont]
                         attributedString.addAttributes(normalAttributes, range: range)
                         break
@@ -324,15 +458,15 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
         return attributedString
     }
     
-    func addUnderlineFormat(attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
-        attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: rangeToModify)
+    func addUnderlineFormat(_ attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
+        attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: rangeToModify)
         return attributedString
     }
     
-    func removeUnderlineFormat(attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
-        attributedString.enumerateAttributesInRange(rangeToModify, options: []) { (attributes, range, _) -> Void in
+    func removeUnderlineFormat(_ attributedString: NSMutableAttributedString, rangeToModify: NSRange) -> NSAttributedString {
+        attributedString.enumerateAttributes(in: rangeToModify, options: []) { (attributes, range, _) -> Void in
             var mutableAttributes = attributes
-            mutableAttributes.removeValueForKey(NSUnderlineStyleAttributeName)
+            mutableAttributes.removeValue(forKey: NSUnderlineStyleAttributeName)
             attributedString.setAttributes(mutableAttributes, range: rangeToModify)
         }
         return attributedString
@@ -342,70 +476,25 @@ public class RichTextEditor: UITextView, UITextViewDelegate {
 
 
 public extension UIFont {
-    func withTraits(traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
-        let descriptor = self.fontDescriptor()
-            .fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
-        return UIFont(descriptor: descriptor, size: 0)
+    func withTraits(_ traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
+        let descriptor = self.fontDescriptor
+            .withSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
+        return UIFont(descriptor: descriptor!, size: 0)
     }
     
     func boldItalic() -> UIFont {
-        return withTraits(.TraitBold, .TraitItalic)
+        return withTraits(.traitBold, .traitItalic)
     }
     
     var isBold: Bool {
-        return fontDescriptor().symbolicTraits.contains(.TraitBold)
+        return fontDescriptor.symbolicTraits.contains(.traitBold)
     }
     
     var isItalic: Bool {
-        return fontDescriptor().symbolicTraits.contains(.TraitItalic)
+        return fontDescriptor.symbolicTraits.contains(.traitItalic)
     }
 }
 
-
-//public extension UITextView {
-//    private struct AssociatedKey {
-//        static var isBoldEnabled: Bool = false
-//        static var isItalicEnabled: Bool = false
-//        static var isUnderlineEnabled: Bool = false
-//        static var isBackSpaceEnabled: Bool = false
-//    }
-//    
-//    var isBoldEnabled:Bool {
-//        get {
-//            return objc_getAssociatedObject(self, &isBoldEnabled) as? Bool ?? false
-//        }
-//        set {
-//            objc_setAssociatedObject(self, &isBoldEnabled, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//        }
-//    }
-//    
-//    var isItalicEnabled:Bool {
-//        get {
-//            return objc_getAssociatedObject(self, &isItalicEnabled) as? Bool ?? false
-//        }
-//        set {
-//            objc_setAssociatedObject(self, &isItalicEnabled, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//        }
-//    }
-//    
-//    var isUnderlineEnabled:Bool {
-//        get {
-//            return objc_getAssociatedObject(self, &isUnderlineEnabled) as? Bool ?? false
-//        }
-//        set {
-//            objc_setAssociatedObject(self, &isUnderlineEnabled, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//        }
-//    }
-//    
-//    var isBackSpaceEnabled:Bool {
-//        get {
-//            return objc_getAssociatedObject(self, &isBackSpaceEnabled) as? Bool ?? false
-//        }
-//        set {
-//            objc_setAssociatedObject(self, &isBackSpaceEnabled, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//        }
-//    }
-//}
 
 
 

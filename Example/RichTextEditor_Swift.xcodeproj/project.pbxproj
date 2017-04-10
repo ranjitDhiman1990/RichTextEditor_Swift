@@ -507,6 +507,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8BE8C7400F0CD1F520F2334D /* Pods-RichTextEditor_Swift_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RichTextEditor_Swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -521,6 +522,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A7F81E030E19BA939A90CE0E /* Pods-RichTextEditor_Swift_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RichTextEditor_Swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

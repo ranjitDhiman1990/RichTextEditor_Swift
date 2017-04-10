@@ -21,11 +21,11 @@ class RichTextFormatterView: UIView {
     var underlinedButtonTapAction: ((UIButton) -> Void)?
     var imageAtachmentButtonTapAction: ((UIButton) -> Void)?
     
-    var buttonBackgroungUnSelectedStateColor = UIColor.blueColor()
-    var buttonBackgroundSelectedStateColor = UIColor.whiteColor()
+    var buttonBackgroungUnSelectedStateColor = UIColor.blue
+    var buttonBackgroundSelectedStateColor = UIColor.white
     
-    var buttonUnSelectedStateColor = UIColor.whiteColor()
-    var buttonSelectedStateColor = UIColor.blueColor()
+    var buttonUnSelectedStateColor = UIColor.white
+    var buttonSelectedStateColor = UIColor.blue
     
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -36,7 +36,7 @@ class RichTextFormatterView: UIView {
     */
     
     class func instanceFromNib() -> RichTextFormatterView {
-        return UINib(nibName: "RichTextFormatterView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! RichTextFormatterView
+        return UINib(nibName: "RichTextFormatterView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! RichTextFormatterView
     }
     
     
@@ -47,56 +47,56 @@ class RichTextFormatterView: UIView {
     }
     
     func configureButtonsColor() {
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         
-        self.boldButton.setTitle("Bold", forState: .Normal)
-        self.boldButton.setTitle("Bold", forState: .Selected)
-        self.boldButton.setTitleColor(buttonUnSelectedStateColor, forState: .Normal)
-        self.boldButton.setTitleColor(buttonSelectedStateColor, forState: .Selected)
+        self.boldButton.setTitle("Bold", for: .normal)
+        self.boldButton.setTitle("Bold", for: .selected)
+        self.boldButton.setTitleColor(buttonUnSelectedStateColor, for: .normal)
+        self.boldButton.setTitleColor(buttonSelectedStateColor, for: .selected)
         self.boldButton.backgroundColor = buttonBackgroungUnSelectedStateColor
-        self.boldButton = self.roundedButton(self.boldButton)
+        self.boldButton = self.roundedButton(sender: self.boldButton)
         
         
-        self.italicsButton.setTitle("Italics", forState: .Normal)
-        self.italicsButton.setTitle("Italics", forState: .Selected)
-        self.italicsButton.setTitleColor(buttonUnSelectedStateColor, forState: .Normal)
-        self.italicsButton.setTitleColor(buttonSelectedStateColor, forState: .Selected)
+        self.italicsButton.setTitle("Italics", for: .normal)
+        self.italicsButton.setTitle("Italics", for: .selected)
+        self.italicsButton.setTitleColor(buttonUnSelectedStateColor, for: .normal)
+        self.italicsButton.setTitleColor(buttonSelectedStateColor, for: .selected)
         self.italicsButton.backgroundColor = buttonBackgroungUnSelectedStateColor
-        self.italicsButton = self.roundedButton(self.italicsButton)
+        self.italicsButton = self.roundedButton(sender: self.italicsButton)
         
         
-        self.underlinedButton.setTitle("Underline", forState: .Normal)
-        self.underlinedButton.setTitle("Underline", forState: .Selected)
-        self.underlinedButton.setTitleColor(buttonUnSelectedStateColor, forState: .Normal)
-        self.underlinedButton.setTitleColor(buttonSelectedStateColor, forState: .Selected)
+        self.underlinedButton.setTitle("Underline", for: .normal)
+        self.underlinedButton.setTitle("Underline", for: .selected)
+        self.underlinedButton.setTitleColor(buttonUnSelectedStateColor, for: .normal)
+        self.underlinedButton.setTitleColor(buttonSelectedStateColor, for: .selected)
         self.underlinedButton.backgroundColor = buttonBackgroungUnSelectedStateColor
-        self.underlinedButton = self.roundedButton(self.underlinedButton)
+        self.underlinedButton = self.roundedButton(sender: self.underlinedButton)
         
         
-        self.boldButton.setTitle("Bold", forState: .Normal)
-        self.boldButton.setTitleColor(buttonUnSelectedStateColor, forState: .Normal)
-        self.boldButton.setTitleColor(buttonSelectedStateColor, forState: .Selected)
+        self.boldButton.setTitle("Bold", for: .normal)
+        self.boldButton.setTitleColor(buttonUnSelectedStateColor, for: .normal)
+        self.boldButton.setTitleColor(buttonSelectedStateColor, for: .selected)
         self.boldButton.backgroundColor = buttonBackgroungUnSelectedStateColor
-        self.boldButton = self.roundedButton(self.boldButton)
+        self.boldButton = self.roundedButton(sender: self.boldButton)
     }
     
     @IBAction func boldButtonTapped(sender: UIButton) {
-        self.setButtonBackgroundColor(sender)
+        self.setButtonBackgroundColor(sender: sender)
         boldButtonTapAction?(sender)
     }
     
     @IBAction func italicsButtonTapped(sender: UIButton) {
-        self.setButtonBackgroundColor(sender)
+        self.setButtonBackgroundColor(sender: sender)
         italicsButtonTapAction?(sender)
     }
     
     @IBAction func underlinedButtonTapped(sender: UIButton) {
-        self.setButtonBackgroundColor(sender)
+        self.setButtonBackgroundColor(sender: sender)
         underlinedButtonTapAction?(sender)
     }
     
     func setButtonBackgroundColor(sender: UIButton) {
-        if !sender.selected {
+        if !sender.isSelected {
             sender.backgroundColor = buttonBackgroundSelectedStateColor
         } else {
             sender.backgroundColor = buttonBackgroungUnSelectedStateColor

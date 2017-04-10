@@ -34,7 +34,7 @@ class RichTextViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.richTextEditor.becomeFirstResponder()
     }
 
@@ -54,41 +54,98 @@ class RichTextViewController: UIViewController {
     }
     */
     
+    @IBAction func generateHTMLString(sender: UIBarButtonItem) {
+        print("The html string = \(self.richTextEditor.attributedText.generateHtmlString())")
+    }
+    
     
     @IBAction func txtFormatterButtonTapped(sender: UIButton) {
         if sender.tag == boldTag {
-            if !sender.selected {
-                self.richTextEditor.isBoldEnabled = true
-            } else {
-                self.richTextEditor.isBoldEnabled = false
-            }
-            
-            sender.selected = !sender.selected
+            self.richTextEditor.formatBoldSeletedText()
+            sender.isSelected = !sender.isSelected
         } else if sender.tag == italicTag {
-            if !sender.selected {
-                self.richTextEditor.isItalicEnabled = true
-            } else {
-                self.richTextEditor.isItalicEnabled = false
-            }
-            
-            sender.selected = !sender.selected
+            self.richTextEditor.formatItalicSeletedText()
+            sender.isSelected = !sender.isSelected
         } else if sender.tag == underlinedTag {
-            if !sender.selected {
-                self.richTextEditor.isUnderlineEnabled = true
-            } else {
-                self.richTextEditor.isUnderlineEnabled = false
-            }
-            
-            sender.selected = !sender.selected
+            self.richTextEditor.formatUnderlinedSeletedText()
+            sender.isSelected = !sender.isSelected
         } else if sender.tag == imageAttachmentTag {
-//            if !sender.selected {
-//                self.richTextEditor.isBoldEnabled = true
-//            } else {
-//                self.richTextEditor.isBoldEnabled = false
-//            }
+
+        }
+    }
+}
+
+
+
+public extension NSAttributedString {
+    func generateHtmlString(isRemoveFontStyle: Bool = false) -> String {
+        let range = NSMakeRange(0, self.length)
+        var htmlString = ""
+        self.enumerateAttributes(in: range, options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (object, range, stop) in
+            
+            if object.keys.contains(NSAttachmentAttributeName) {
+                if let attachment = object[NSAttachmentAttributeName] as? NSTextAttachment {
+                    print(attachment)
+                }
+            } else if object.keys.contains(NSFontAttributeName) {
+                if let font = object[NSFontAttributeName] as? UIFont {
+                    var currentString = self.attributedSubstring(from: range).string
+                    currentString = currentString.replacingOccurrences(of: "\n", with: "<br>")
+                    var stringToAppend = ""
+                    var isBold = false
+                    var isItalic = false
+                    var isUnderlined = false
+                    
+                    if font.isBold {
+                        isBold = true
+                        if !currentString.isEmpty {
+                            stringToAppend = stringToAppend + "<b>"
+                        }
+                    }
+                    if font.isItalic {
+                        isItalic = true
+                        if !currentString.isEmpty {
+                            stringToAppend = stringToAppend + "<i>"
+                        }
+                    }
+                    if object.keys.contains(NSUnderlineStyleAttributeName) {
+                        isUnderlined = true
+                        stringToAppend = stringToAppend + "<u>"
+                    }
+                    
+                    if !currentString.isEmpty {
+                        htmlString = htmlString + stringToAppend + currentString
+                        if isBold {
+                            htmlString = htmlString + "</b>"
+                        }
+                        if isItalic {
+                            htmlString = htmlString + "</i>"
+                        }
+                        if isUnderlined {
+                            htmlString = htmlString + "</u>"
+                        }
+                    }
+                    
+                }
+            } else if object.keys.contains(NSUnderlineStyleAttributeName) {
+                if let _ = object[NSUnderlineStyleAttributeName] as? NSUnderlineStyle {
+                    var currentString = self.attributedSubstring(from: range).string
+                    currentString = currentString.replacingOccurrences(of: "\n", with: "<br>")
+                    if !currentString.isEmpty {
+                        htmlString = htmlString + "<u>" + currentString + "</u>"
+                    } else {
+                        htmlString = htmlString + "<u>" + "</u>"
+                    }
+                }
+            } else {
+                var currentString : String = self.attributedSubstring(from: range).string
+                currentString = currentString.replacingOccurrences(of: "\n", with: "<br>")
+                if !currentString.isEmpty {
+                    htmlString = htmlString + currentString
+                }
+            }
         }
         
-        
+        return htmlString
     }
-
 }
